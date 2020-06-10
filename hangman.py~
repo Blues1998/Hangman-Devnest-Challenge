@@ -25,12 +25,12 @@ def get_guessed_word(secret_word, letters_guessed):
 	Returning words with guessed letters exposed and letters yet to be guessed with an underscore _
 	'''
 	guessed_word = ""
-	for letter in secret_word:
-		if letter in letters_guessed:
-			guessed_word += letter
-		else:
-			guessed_word += '_'
-	return guessed_word
+    for letter in secret_word:
+    	if letter in letters_guessed:
+    		guessed_word += letter
+    	else:
+    		guessed_word += '_'
+    return guessed_word
 
 def get_available_letters(letters_guessed):
 	'''
