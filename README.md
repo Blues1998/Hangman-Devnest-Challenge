@@ -23,3 +23,14 @@
     </code>
     </pre>
 </p>
+
+<h3> Screenshots of gameplay </h3>
+
+![alt text](https://github.com/Blues1998/Hangman-Devnest-Challenge/blob/master/Testing/Hangman.png?raw=true)
+
+![alt text](https://github.com/Blues1998/Hangman-Devnest-Challenge/blob/master/Testing/hangman2.png?raw=true)
+
+![alt text](https://github.com/Blues1998/Hangman-Devnest-Challenge/blob/master/Testing/hangman3.png?raw=true)
+
+![alt text](https://github.com/Blues1998/Hangman-Devnest-Challenge/blob/master/Testing/hangman4.png?raw=true)
+
