@@ -1,16 +1,25 @@
 import string
 import time
 import re
+import random
 from words import choose_word
 from images import IMAGES
 
 LETTERS = string.ascii_lowercase
+HINT_USED = False
 
 def is_word_guessed(secret_word, letters_guessed):
+
 	for letter in secret_word:
 		if letter not in letters_guessed:
 			return False
 	return True
+
+#	print(str(''.join(sorted(set(secret_word)))))
+#	print(str(''.join(sorted(letters_guessed))))
+#	if str(''.join(sorted(set(secret_word)))) in str(''.join(sorted(letters_guessed))):
+#		return True
+#	return False
 
 def get_guessed_word(secret_word, letters_guessed):
     guessed_word = ""
@@ -22,6 +31,7 @@ def get_guessed_word(secret_word, letters_guessed):
     return guessed_word
 
 def get_available_letters(letters_guessed):
+	
 	global LETTERS
 	if len(letters_guessed) >= 1:
 		LETTERS = LETTERS.replace(letters_guessed[-1],'')
@@ -29,6 +39,27 @@ def get_available_letters(letters_guessed):
 
 def display_hangman(remaining_lives, letters_guessed):
 	print(IMAGES[7 - remaining_lives])
+
+def check_validity(guess, secret_word, letters_guessed):
+	global HINT_USED
+	if len(guess) != 1:
+		if guess.lower() == 'hint':
+			if not HINT_USED:
+				try:
+					print("\tHint: {}\n\n".format(random.choice([c for c in secret_word if c not in letters_guessed])))
+					HINT_USED = True
+					return False
+				except IndexError:
+					print("\n\tAn error occurred.\n\tCannot choose from an empty sequence!\n\n")
+			else:
+				print("\tHint is available only once in one gameplay!\n\n")
+				return False
+		print("\tInvalid input, enter a letter as guess.\n\n")
+		return False
+	elif guess not in string.ascii_lowercase:
+		print("\tInvalid input, enter a letter as guess.\n\n")
+		return False
+	return True
 
 def hangman(secret_word):
 	print("\n\n\n\t\t\t\t\t\tWelcome to the game, Hangman!")
@@ -49,6 +80,8 @@ def hangman(secret_word):
 		print("\tAvailable letters: {} \t\t\tRemaining lives: {}\t\t\tBlanks to fill: {}".format(available_letters, remaining_lives, blanks_to_fill))
 		time.sleep(1)
 		guess = input("\n\n\tPlease guess a letter: ")
+		if not check_validity(guess, secret_word, letters_guessed):
+			continue
 		letter = guess.lower()
 		
 		time.sleep(1)
@@ -77,13 +110,11 @@ def hangman(secret_word):
 			display_hangman(remaining_lives, letters_guessed)
 			
 		if remaining_lives == 0:
-			print("\tGame over!!\n"+"_"*150)
+			print("\tGame over!!\n")
 			print("\n\tThe word was: {}".format(secret_word))
+			print("_"*150)
 			break
-#Load the list of words into the variable wordlist
-#So that it can be accessed from anywhere in the program
 
 if __name__ == '__main__':
 	secret_word = choose_word()
 	hangman(secret_word)
-
