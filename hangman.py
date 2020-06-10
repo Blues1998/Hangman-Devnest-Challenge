@@ -6,7 +6,7 @@ import random
 from words import choose_word
 from images import IMAGES
 
-# Initializing libraries
+# Initializing constants
 LETTERS = string.ascii_lowercase
 HINT_USED = False
 
@@ -90,7 +90,13 @@ def hangman(secret_word):
 		
 		# Some nice formatting
 		print("\n\t"+">"*125)
-		print("\tAvailable letters: {} \t\t\tRemaining lives: {}\t\t\tBlanks to fill: {}".format(available_letters, remaining_lives, blanks_to_fill))
+		
+		# Header displaying current status for player.
+		print("\tAvailable letters: {} \t\t\tRemaining lives: {}\t\t\tBlanks to fill: {}".format(
+			available_letters, 
+			remaining_lives, 
+			blanks_to_fill))
+		
 		time.sleep(1)
 		guess = input("\n\n\tPlease guess a letter: ")
 		if not check_validity(guess, secret_word, letters_guessed):
