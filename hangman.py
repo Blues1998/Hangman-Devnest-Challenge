@@ -7,17 +7,10 @@ from images import IMAGES
 LETTERS = string.ascii_lowercase
 
 def is_word_guessed(secret_word, letters_guessed):
-
 	for letter in secret_word:
 		if letter not in letters_guessed:
 			return False
 	return True
-
-#	print(str(''.join(sorted(set(secret_word)))))
-#	print(str(''.join(sorted(letters_guessed))))
-#	if str(''.join(sorted(set(secret_word)))) in str(''.join(sorted(letters_guessed))):
-#		return True
-#	return False
 
 def get_guessed_word(secret_word, letters_guessed):
     guessed_word = ""
@@ -29,7 +22,6 @@ def get_guessed_word(secret_word, letters_guessed):
     return guessed_word
 
 def get_available_letters(letters_guessed):
-	
 	global LETTERS
 	if len(letters_guessed) >= 1:
 		LETTERS = LETTERS.replace(letters_guessed[-1],'')
