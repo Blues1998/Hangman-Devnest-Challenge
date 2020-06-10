@@ -1,3 +1,4 @@
+# Importing required libraries
 import string
 import time
 import re
@@ -5,23 +6,24 @@ import random
 from words import choose_word
 from images import IMAGES
 
+# Initializing libraries
 LETTERS = string.ascii_lowercase
 HINT_USED = False
 
 def is_word_guessed(secret_word, letters_guessed):
-
+	'''
+	Function to verify if letters_guessed can create secret_word
+	Basically checking if all the letters in secret_word are present in letters_guessed
+	'''
 	for letter in secret_word:
 		if letter not in letters_guessed:
 			return False
 	return True
 
-#	print(str(''.join(sorted(set(secret_word)))))
-#	print(str(''.join(sorted(letters_guessed))))
-#	if str(''.join(sorted(set(secret_word)))) in str(''.join(sorted(letters_guessed))):
-#		return True
-#	return False
-
 def get_guessed_word(secret_word, letters_guessed):
+	'''
+	Returning words with guessed letters exposed and letters yet to be guessed with an underscore _
+	'''
     guessed_word = ""
     for letter in secret_word:
     	if letter in letters_guessed:
@@ -31,16 +33,24 @@ def get_guessed_word(secret_word, letters_guessed):
     return guessed_word
 
 def get_available_letters(letters_guessed):
-	
+	'''
+	Returning letters that are available for the player to guess still. Initialising with letters [a-z]
+	'''
 	global LETTERS
 	if len(letters_guessed) >= 1:
 		LETTERS = LETTERS.replace(letters_guessed[-1],'')
 	return LETTERS
 
 def display_hangman(remaining_lives, letters_guessed):
+	'''
+	Function to simply print the hangman status every time there's a incorrectly guessed letter by the player.
+	'''
 	print(IMAGES[7 - remaining_lives])
 
 def check_validity(guess, secret_word, letters_guessed):
+	'''
+	Function for checking validity of input from player and providing support for hint.
+	'''
 	global HINT_USED
 	if len(guess) != 1:
 		if guess.lower() == 'hint':
@@ -62,6 +72,9 @@ def check_validity(guess, secret_word, letters_guessed):
 	return True
 
 def hangman(secret_word):
+	'''
+	Pretty much the entire layout setup, input handling etc is present in this chunk of code.
+	'''
 	print("\n\n\n\t\t\t\t\t\tWelcome to the game, Hangman!")
 	time.sleep(2)
 	print("\n\tI am thinking of a word that is {} letters long.".format(str(len(secret_word))), end = '\n\n')
@@ -116,5 +129,8 @@ def hangman(secret_word):
 			break
 
 if __name__ == '__main__':
+	'''
+	Driver function
+	'''
 	secret_word = choose_word()
 	hangman(secret_word)
